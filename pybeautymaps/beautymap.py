@@ -6,7 +6,6 @@ from . import utils
 
 
 class Beautymap:
-
     @classmethod
     def square_centered(cls, center_latlon, width):
         bbox = utils.bbox_from_centered(center_latlon, width)
@@ -18,25 +17,21 @@ class Beautymap:
         self.carthographic_bbox = utils.carthographic_from_geodetic(bbox_data)[0]
 
         self.road_types = {
-            'motorway',
-            'trunk',
-            'primary',
-            'secondary',
-            'tertiary',
-            'residential',
-            'living_street',
+            "motorway",
+            "trunk",
+            "primary",
+            "secondary",
+            "tertiary",
+            "residential",
+            "living_street",
         }
 
         self.raw_overpass_data = self.get_overpass_data()
 
-        self.road_data = [
-            way.tags.get('highway', '')
-            for way in self.raw_overpass_data
-        ]
+        self.road_data = [way.tags.get("highway", "") for way in self.raw_overpass_data]
 
         self.geodetic_data = [
-            np.array([(node.lat, node.lon) for node in way.nodes], dtype=float)
-            for way in self.raw_overpass_data
+            np.array([(node.lat, node.lon) for node in way.nodes], dtype=float) for way in self.raw_overpass_data
         ]
 
         self.carthographic_data = utils.carthographic_from_geodetic(*self.geodetic_data)
@@ -103,13 +98,13 @@ class Beautymap:
 if __name__ == "__main__":
     m = Beautymap.square_centered((40.757667, -73.983715), 8.0)
     m.render_square_png(
-        filename='test.png',
+        filename="test.png",
         size=2000,
         padding=50,
         line_widths={
-            'trunk': 5,
-            'primary': 4,
-            'secondary': 3,
-            'tertiary': 2,
-        }
+            "trunk": 5,
+            "primary": 4,
+            "secondary": 3,
+            "tertiary": 2,
+        },
     )

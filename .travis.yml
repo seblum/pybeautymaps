@@ -16,7 +16,7 @@ matrix:
     - python: "3.8-dev"
     - python: "nightly"
 
-script: 
+script:
   - python setup.py pytest
 after_success:
   - pip install coveralls

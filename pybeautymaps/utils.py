@@ -14,13 +14,13 @@ def is_valid_longitude(lon):
 
 def bbox_from_centered(center_latlon, width):
     if width <= 0:
-        raise ValueError(f'Bounding box width must be positive! Is: {width}')
+        raise ValueError(f"Bounding box width must be positive! Is: {width}")
 
     lat, lon = center_latlon
     if not is_valid_latitude(lat):
-        raise ValueError(f'Latitude needs to be in [-90, 90]! Is: {lat}')
+        raise ValueError(f"Latitude needs to be in [-90, 90]! Is: {lat}")
     if not is_valid_longitude(lon):
-        raise ValueError(f'Longitude needs to be in [-180, 180]! Is: {lon}')
+        raise ValueError(f"Longitude needs to be in [-180, 180]! Is: {lon}")
 
     # quick and dirty conversion of cathographic to geodetic distances
     # see: https://gis.stackexchange.com/a/2964
