@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pybeautymaps"
+version = "0.1.0"
+description = "This is a library for creating beautyful map images with python."
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.24.2"
+overpy = "^0.6"
+pycairo = "^1.23.0"
+pyproj = "^3.5.0"
+tqdm = "^4.65.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+pybeautymaps = "pybeautymaps.beautymap:main"
