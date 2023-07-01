@@ -1,7 +1,7 @@
 import cairo
 import numpy as np
 import overpy
-
+from tqdm import tqdm
 from . import utils
 
 
@@ -11,6 +11,16 @@ class Beautymap:
         bbox = utils.bbox_from_centered(center_latlon, width)
         return cls(bbox)
 
+    # @classmethod
+    # def circle_centered(cls, center_latlon, width, height):
+    #     bbox = utils.bbox_circle_from_centered(center_latlon, radius)
+    #     return cls(bbox)
+    
+    # @classmethod
+    # def rectangle_centered(cls, center_latlon, radius):
+    #     bbox = utils.bbox_rectangle_from_centered(center_latlon, width, height)
+    #     return cls(bbox)
+    
     def __init__(self, bbox):
         self.bbox = bbox
         bbox_data = np.array(self.bbox).reshape((2, 2))
@@ -70,7 +80,7 @@ class Beautymap:
 
             ctx.set_source_rgb(0, 0, 0)
             ctx.set_line_cap(cairo.LINE_CAP_ROUND)
-            for way, road_type in zip(self.carthographic_data, self.road_data):
+            for way, road_type in zip(tqdm(self.carthographic_data), self.road_data):
                 ctx.set_line_width(line_widths.get(road_type, 1))
                 way_zeroed = (way - coord_min - offset) * px_per_coord + padding
                 way_zeroed = np.rint(way_zeroed).astype(int)
@@ -95,10 +105,13 @@ class Beautymap:
             surface.write_to_png(filename)
 
 
-if __name__ == "__main__":
-    m = Beautymap.square_centered((40.757667, -73.983715), 8.0)
+#if __name__ == "__main__":
+# TODO: add support for click
+def main():
+    coordinates = (53.53803352402426, 9.983993723580662)
+    m = Beautymap.square_centered(coordinates, 20.0)
     m.render_square_png(
-        filename="test.png",
+        filename="test_2.png",
         size=2000,
         padding=50,
         line_widths={

@@ -31,6 +31,13 @@ def bbox_from_centered(center_latlon, width):
     return bbox
 
 
+def bbox_circle_from_centered():
+    pass
+
+
+def bbox_rectangle_from_centered():
+    pass
+
 def carthographic_from_geodetic(*latlons):
     # EPSG.3857 projection https://epsg.io/3857
     # Pseudo-Mercator as used by Google Maps and Open Street Maps
